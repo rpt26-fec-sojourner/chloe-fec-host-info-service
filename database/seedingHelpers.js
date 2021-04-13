@@ -88,6 +88,12 @@ seeder.hostNames = [
   'John W. Young'
 ];
 
+seeder.responseTimes = [
+  'an hour',
+  'a day',
+  'a month'
+];
+
 
 // FUNCTIONS
 seeder.generateHostName = (randomNumber) => {
@@ -112,13 +118,25 @@ seeder.generateSuperhostFlag = () => {
   return faker.random.boolean();
 };
 
-// Generate fake host desc
+seeder.generateHostDesc = () => {
+  return faker.lorem.paragraph();
+};
 
-// Generate fake stay desc
+seeder.generateStayDesc = () => {
+  return faker.lorem.sentence();
+};
 
-// Generate fake response rate
+seeder.generateResponseRate = (randomNumber) => {
+  const responseRate = Math.ceil(randomNumber * 100);
 
-// Generate fake response time
+  return responseRate.toString();
+};
+
+seeder.generateResponseTime = (randomNumber) => {
+  const responseTimeIndex = Math.floor(randomNumber * seeder.responseTimes.length);
+
+  return seeder.responseTimes[responseTimeIndex];
+};
 
 // Insert into MongoDB
 seeder.seedDB = () => {

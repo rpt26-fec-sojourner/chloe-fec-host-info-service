@@ -104,9 +104,13 @@ seeder.generateJoinDate = (randomNumber) => {
   return `${joinMonth} ${joinYear}`;
 };
 
-// Generate fake host review count
+seeder.generateHostReviewCount = () => {
+  return faker.random.number();
+};
 
-// Generate fake superhost flag
+seeder.generateSuperhostFlag = () => {
+  return faker.random.boolean();
+};
 
 // Generate fake host desc
 
@@ -121,5 +125,5 @@ seeder.seedDB = () => {
   const maxRecords = 100;
 
   // Loop 100 times
-    // For each loop, generate a random number to pass into the helper functions.
+    // For each loop, generate a random number to pass into the helper functions using Math.random()
 };

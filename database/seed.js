@@ -1,4 +1,6 @@
 const faker = require('faker');
+const mongoose = require('mongoose');
+const dbHelper = require('./hostModel.js');
 
 /*
 let hostSchema = mongoose.Schema({
@@ -110,12 +112,14 @@ seeder.generateJoinDate = (randomNumber) => {
   return `${joinMonth} ${joinYear}`;
 };
 
-seeder.generateHostReviewCount = () => {
-  return faker.random.number();
+seeder.generateHostReviewCount = (randomNumber) => {
+  // Random number of reviews between 1 and 1000;
+  const numberOfReviews = Math.ceil(randomNumber * 1000);
+  return numberOfReviews;
 };
 
 seeder.generateSuperhostFlag = () => {
-  return faker.random.boolean();
+  return faker.datatype.boolean();
 };
 
 seeder.generateHostDesc = () => {
@@ -138,10 +142,59 @@ seeder.generateResponseTime = (randomNumber) => {
   return seeder.responseTimes[responseTimeIndex];
 };
 
-// Insert into MongoDB
 seeder.seedDB = () => {
-  const maxRecords = 100;
+  mongoose.connect('mongodb://localhost:27017/airbnb_host', {useNewUrlParser: true, useUnifiedTopology: true})
+    .then(() => {
+      dbHelper.deleteAllHosts();
+    })
+    .then(() => {
+      let listingID = 1;
+      let randomNumber;
+      let hostName;
+      let joinDate;
+      let hostReviewCount;
+      let superhostFlag;
+      let hostDescription;
+      let stayDescription;
+      let responseRate;
+      let responseTime;
 
-  // Loop 100 times
-    // For each loop, generate a random number to pass into the helper functions using Math.random()
+      let hostInfo = {};
+
+      while (listingID <= 100) {
+        randomNumber = Math.random();
+        hostName = seeder.generateHostName(randomNumber);
+        joinDate = seeder.generateJoinDate(randomNumber);
+        hostReviewCount = seeder.generateHostReviewCount(randomNumber);
+        superhostFlag = seeder.generateSuperhostFlag();
+        hostDescription = seeder.generateHostDesc();
+        stayDescription = seeder.generateStayDesc();
+        responseRate = seeder.generateResponseRate(randomNumber);
+        responseTime = seeder.generateResponseTime(randomNumber);
+        hostInfo = {
+          listingID,
+          hostName,
+          joinDate,
+          hostReviewCount,
+          superhostFlag,
+          hostDescription,
+          stayDescription,
+          responseRate,
+          responseTime
+        };
+
+        dbHelper.createHost(hostInfo);
+        listingID++;
+      }
+    })
+    .then(() => {
+      console.log('Successfully created 100 Host documents');
+    })
+    .catch((err) => {
+      console.log('Error connecting to database: ', err);
+    });
 };
+
+seeder.seedDB();
+
+module.exports.seeder = seeder;

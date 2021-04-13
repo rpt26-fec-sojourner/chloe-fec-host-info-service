@@ -4,6 +4,7 @@ const port = 2222;
 const bodyParser = require('body-parser');
 const path = require('path');
 const distPath = path.join(__dirname, 'client/dist');
+const hostModel = require('./database/hostModel.js');
 
 app.use(express.static(distPath));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -14,8 +15,15 @@ app.use((req, res, next) => {
 });
 
 app.get('/host/:listing_id', (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  // Search DB for provided listing id
+  let listingID = req.params.listing_id;
+
+  hostModel.findHostInfo(listingID)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      console.log(`Error querying db for listing ID ${listingID}: ${err}`);
+    });
 });
 
 app.get('/:listing_id', (req, res) => {

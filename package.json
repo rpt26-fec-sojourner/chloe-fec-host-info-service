@@ -7,7 +7,10 @@
   "engines": {
     "node": ">=6.13.0"
   },
-  "scripts": {},
+  "scripts": {
+    "start": "nodemon server/index.js",
+    "build": "webpack"
+  },
   "dependencies": {
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",

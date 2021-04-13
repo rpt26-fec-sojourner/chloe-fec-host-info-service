@@ -7,7 +7,7 @@ const Reviews = (props) => {
       <img src={superhostBadge} alt="Superhost Badge"/>
       <span> Superhost</span>
     </span>
-    : <div></div>;
+    : <span></span>;
   return (
     <div>
       <span>{`${props.count} Reviews`}</span>

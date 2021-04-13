@@ -57,11 +57,11 @@ class App extends React.Component {
     return (
       <div>
         <Name hostName={this.state.hostName} joinDate={this.state.joinDate}/>
-        <Reviews count={this.state.hostReviewCount} superhost={this.state.superhostFlag}/>{/*
-        <ResponseInfo />
-        <Description />
+        <Reviews count={this.state.hostReviewCount} superhost={this.state.superhostFlag}/>
+        <ResponseInfo rate={this.state.responseRate} time={this.state.responseTime}/>
+        <Description hostDescription={this.state.hostDescription} stayDescription={this.state.stayDescription}/>
         <ContactHost />
-        <SuperhostDesc /> */}
+        <SuperhostDesc hostName={this.state.hostName} superhost={this.state.superhostFlag}/>
       </div>
     );
   }

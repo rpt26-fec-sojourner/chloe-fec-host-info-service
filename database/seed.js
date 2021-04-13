@@ -115,7 +115,7 @@ seeder.generateJoinDate = (randomNumber) => {
 seeder.generateHostReviewCount = (randomNumber) => {
   // Random number of reviews between 1 and 1000;
   const numberOfReviews = Math.ceil(randomNumber * 1000);
-  return numberOfReviews;
+  return numberOfReviews.toString();
 };
 
 seeder.generateSuperhostFlag = () => {

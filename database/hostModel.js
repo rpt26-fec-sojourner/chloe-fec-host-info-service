@@ -4,7 +4,7 @@ let hostSchema = mongoose.Schema({
   listingID: Number,
   hostName: String,
   joinDate: String,
-  hostReviewCount: Number,
+  hostReviewCount: String,
   superhostFlag: Boolean,
   hostDescription: String,
   stayDescription: String,
@@ -26,7 +26,7 @@ Host.createHost = (newHost) => {
   let newHostSchemaInstance = new Host(
     {
       listingID: newHost.listingID,
-      hostName: newHost.hostNames,
+      hostName: newHost.hostName,
       joinDate: newHost.joinDate,
       hostReviewCount: newHost.hostReviewCount,
       superhostFlag: newHost.superhostFlag,

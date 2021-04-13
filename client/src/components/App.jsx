@@ -1,6 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 const url = 'http://localhost:2222';
+import Name from './Name.jsx';
+import Reviews from './Reviews.jsx';
+import ResponseInfo from './ResponseInfo.jsx';
+import Description from './Description.jsx';
+import ContactHost from './ContactHost.jsx';
+import SuperhostDesc from './SuperhostDesc.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,6 +16,7 @@ class App extends React.Component {
       listingID: 1,
       hostName: '',
       joinDate: '',
+      hostReviewCount: '',
       superhostFlag: false,
       hostDescription: '',
       stayDescription: '',
@@ -29,17 +36,32 @@ class App extends React.Component {
   getHostInfo(listingID) {
     axios.get(`${url}/host/${listingID}`)
       .then((res) => {
-        console.log('res: ', res);
+        this.setState({
+          listingID: listingID,
+          hostName: res.data.hostName,
+          joinDate: res.data.joinDate,
+          hostReviewCount: res.data.hostReviewCount,
+          superhostFlag: res.data.superhostFlag,
+          hostDescription: res.data.hostDescription,
+          stayDescription: res.data.stayDescription,
+          responseRate: res.data.responseRate,
+          responseTime: res.data.responseTime
+        });
       })
       .catch((err) => {
-        console.log(`Error getting host Info for listing ID: ${listingID}`)
+        console.log(`Error getting host Info for listing ID: ${listingID}`);
       });
   }
 
   render() {
     return (
       <div>
-        <div>Hello World!</div>
+        <Name hostName={this.state.hostName} joinDate={this.state.joinDate}/>
+        <Reviews count={this.state.hostReviewCount} superhost={this.state.superhostFlag}/>{/*
+        <ResponseInfo />
+        <Description />
+        <ContactHost />
+        <SuperhostDesc /> */}
       </div>
     );
   }

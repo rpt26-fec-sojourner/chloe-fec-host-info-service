@@ -1,3 +1,5 @@
+const faker = require('faker');
+
 /*
 let hostSchema = mongoose.Schema({
   listingID: Number,
@@ -88,14 +90,19 @@ seeder.hostNames = [
 
 
 // FUNCTIONS
-// Generate fake hostNames
-seeder.generateHostName = () => {
-  var hostNameIndex = Math.floor(Math.random() * seeder.hostNames.length);
+seeder.generateHostName = (randomNumber) => {
+  const hostNameIndex = Math.floor(randomNumber * seeder.hostNames.length);
 
   return seeder.hostNames[hostNameIndex];
 };
 
-// Generate fake join date
+seeder.generateJoinDate = (randomNumber) => {
+  // Random year between 2000 and 2021
+  const joinYear = Math.floor(randomNumber * 21) + 2000;
+  const joinMonth = faker.date.month();
+
+  return `${joinMonth} ${joinYear}`;
+};
 
 // Generate fake host review count
 
@@ -110,4 +117,9 @@ seeder.generateHostName = () => {
 // Generate fake response time
 
 // Insert into MongoDB
-// faker
+seeder.seedDB = () => {
+  const maxRecords = 100;
+
+  // Loop 100 times
+    // For each loop, generate a random number to pass into the helper functions.
+};

@@ -13,7 +13,10 @@ app.use((req, res, next) => {
   next();
 });
 
-//TO DO: GET host info API endpoint
+app.get('/host/:listing_id', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  // Search DB for provided listing id
+});
 
 app.get('/:listing_id', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');

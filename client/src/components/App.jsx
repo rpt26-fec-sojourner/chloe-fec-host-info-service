@@ -7,6 +7,22 @@ import ResponseInfo from './ResponseInfo.jsx';
 import Description from './Description.jsx';
 import ContactHost from './ContactHost.jsx';
 import SuperhostDesc from './SuperhostDesc.jsx';
+import styled from 'styled-components';
+
+const LeftMargin = styled.div`
+  width: 41.6667%;
+  padding-left: 8px;
+  padding-right: 8px;
+  float: left;
+`;
+
+const RightMargin = styled.div`
+  width: 41.6667%;
+  margin-left: 8.33333%;
+  padding-left: 8px;
+  padding-right: 8px;
+  float: left;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -47,6 +63,8 @@ class App extends React.Component {
           responseRate: res.data.responseRate,
           responseTime: res.data.responseTime
         });
+
+        console.log('state: ', this.state);
       })
       .catch((err) => {
         console.log(`Error getting host Info for listing ID: ${listingID}`);
@@ -57,11 +75,15 @@ class App extends React.Component {
     return (
       <div>
         <Name hostName={this.state.hostName} joinDate={this.state.joinDate}/>
-        <Reviews count={this.state.hostReviewCount} superhost={this.state.superhostFlag}/>
-        <ResponseInfo rate={this.state.responseRate} time={this.state.responseTime}/>
-        <Description hostDescription={this.state.hostDescription} stayDescription={this.state.stayDescription}/>
-        <ContactHost />
-        <SuperhostDesc hostName={this.state.hostName} superhost={this.state.superhostFlag}/>
+        <LeftMargin>
+          <Reviews count={this.state.hostReviewCount} superhost={this.state.superhostFlag}/>
+          <Description hostDescription={this.state.hostDescription} stayDescription={this.state.stayDescription}/>
+          <SuperhostDesc hostName={this.state.hostName} superhost={this.state.superhostFlag}/>
+        </LeftMargin>
+        <RightMargin>
+          <ResponseInfo rate={this.state.responseRate} time={this.state.responseTime}/>
+          <ContactHost />
+        </RightMargin>
       </div>
     );
   }

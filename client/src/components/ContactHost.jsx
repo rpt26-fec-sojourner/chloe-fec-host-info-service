@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import SecurityBadge from '../assets/AirBnB_SecurityBadge.png';
 
 const Button = styled.button`
   cursor: pointer;
@@ -25,14 +26,32 @@ const Button = styled.button`
   color: rgb(34, 34, 34);
 `;
 
+const Icon = styled.img`
+  height: 24px;
+  width: 24px;
+  display: block;
+  -webkit-box-pack: initial;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  flex-direction: row;
+  justify-content: initial;
+  max-width: 300px;
+`;
+
 const Body = styled.div`
-  font-family: Circular, -apple-system, system-ui, Roboto, "Helvetica Neue", sans-serif;
-  font-style: normal;
+  -webkit-box-align: center;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  color: #222222;
   margin-top: 24px;
+  display: flex;
+  align-items: center;
+  color: #222222;
+`;
+
+const SecurityText = styled.div`
+  padding-left: 10px;
 `;
 
 const ContactHost = (props) => {
@@ -40,8 +59,10 @@ const ContactHost = (props) => {
     <div>
       <Button>Contact host</Button>
       <Body>
-        <span>badgeicon   </span>
-        <span>To protect your payment, never transfer money or communicate outside of the Airbnb website or app.</span>
+        <Icon src={SecurityBadge} alt="Security Badge"></Icon>
+        <SecurityText>
+          To protect your payment, never transfer<br></br>money or communicate outside of the Airbnb<br></br>website or app.
+        </SecurityText>
       </Body>
     </div>
   );

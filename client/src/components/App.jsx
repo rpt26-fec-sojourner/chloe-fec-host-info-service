@@ -24,6 +24,13 @@ const RightMargin = styled.div`
   float: left;
 `;
 
+const Container = styled.div`
+  padding-top: 48px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 48px;
+`;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -52,13 +59,15 @@ class App extends React.Component {
   getHostInfo(listingID) {
     axios.get(`${url}/host/${listingID}`)
       .then((res) => {
+        let hostDesc = res.data.hostDescription.length <= 180 ? res.data.hostDescription : `${res.data.hostDescription.substring(1, 181)}...`;
+
         this.setState({
           listingID: listingID,
           hostName: res.data.hostName,
           joinDate: res.data.joinDate,
           hostReviewCount: res.data.hostReviewCount,
           superhostFlag: res.data.superhostFlag,
-          hostDescription: res.data.hostDescription,
+          hostDescription: hostDesc,
           stayDescription: res.data.stayDescription,
           responseRate: res.data.responseRate,
           responseTime: res.data.responseTime
@@ -73,7 +82,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <Name hostName={this.state.hostName} joinDate={this.state.joinDate}/>
         <LeftMargin>
           <Reviews count={this.state.hostReviewCount} superhost={this.state.superhostFlag}/>
@@ -84,7 +93,7 @@ class App extends React.Component {
           <ResponseInfo rate={this.state.responseRate} time={this.state.responseTime}/>
           <ContactHost />
         </RightMargin>
-      </div>
+      </Container>
     );
   }
 }

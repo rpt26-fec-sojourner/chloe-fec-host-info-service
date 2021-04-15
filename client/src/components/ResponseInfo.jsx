@@ -10,18 +10,22 @@ const Body = styled.li`
   color: #222222;
   list-style: none;
   margin-top: 0px;
-  margin-bottom: 0px;
+  margin-bottom: 8px;
   margin-left: 0px;
   padding-left: 0px;
   padding-right: 0px;
 `;
 
+const Container = styled.ul`
+  padding-left: 0px;
+`;
+
 const ResponseInfo = (props) => {
   return (
-    <ul>
+    <Container>
       <Body>{`Response rate: ${props.rate}%`}</Body>
       <Body>{`Response time: within ${props.time}`}</Body>
-    </ul>
+    </Container>
   );
 };
 

@@ -21,10 +21,47 @@ const Body = styled.div`
   margin-bottom: 24px;
 `;
 
+const ReadMore = styled.span`
+  font-size: inherit;
+  font-family: inherit;
+  font-style: inherit;
+  font-variant: inherit;
+  line-height: inherit;
+  appearance: none;
+  background: transparent;
+  border: 0px;
+  cursor: pointer;
+  margin: 0px;
+  padding: 0px;
+  user-select: auto;
+  color: #000000;
+  text-decoration: underline;
+  border-radius: 4px;
+  font-weight: 600;
+  outline: none;
+`;
+
 const Description = (props) => {
+  let hostDesc;
+
+  if (props.hostDescription.indexOf('...') === -1) {
+    hostDesc =
+    <Body>
+      {props.hostDescription}
+    </Body>;
+  } else {
+    hostDesc =
+      <Body>
+        {props.hostDescription}
+        <ReadMore>
+        read more
+        </ReadMore>
+      </Body>;
+  }
+
   return (
     <div>
-      <Body>{props.hostDescription}</Body>
+      {hostDesc}
       <Title>During your stay</Title>
       <Body>{props.stayDescription}</Body>
     </div>

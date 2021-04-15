@@ -2,24 +2,8 @@ const faker = require('faker');
 const mongoose = require('mongoose');
 const dbHelper = require('./hostModel.js');
 
-/*
-let hostSchema = mongoose.Schema({
-  listingID: Number,
-  hostName: String,         word bank
-  joinDate: String,         faker month + faker year
-  hostReviewCount: Number,  faker number
-  superhostFlag: Boolean,   random ceiling from 0 to 1
-  hostDescription: String,  faker text
-  stayDescription: String,  faker text
-  responseRate: String,     faker percentage
-  responseTime: String      "within a(n) " + faker unit of time (hour, day, week, month)
-});
-*/
-
 let seeder = {};
 
-// WORD BANKS
-// Astronaut names
 seeder.hostNames = [
   'Buzz Aldrin',
   'William A. Anders',
@@ -96,8 +80,6 @@ seeder.responseTimes = [
   'a month'
 ];
 
-
-// FUNCTIONS
 seeder.generateHostName = (randomNumber) => {
   const hostNameIndex = Math.floor(randomNumber * seeder.hostNames.length);
 
@@ -145,7 +127,7 @@ seeder.generateResponseTime = (randomNumber) => {
 seeder.seedDB = () => {
   mongoose.connect('mongodb://localhost:27017/airbnb_host', {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
-      dbHelper.deleteAllHosts();
+      return dbHelper.deleteAllHosts();
     })
     .then(() => {
       let listingID = 1;
@@ -172,15 +154,15 @@ seeder.seedDB = () => {
         responseRate = seeder.generateResponseRate(randomNumber);
         responseTime = seeder.generateResponseTime(randomNumber);
         hostInfo = {
-          listingID,
-          hostName,
-          joinDate,
-          hostReviewCount,
-          superhostFlag,
-          hostDescription,
-          stayDescription,
-          responseRate,
-          responseTime
+          listingID: listingID,
+          hostName: hostName,
+          joinDate: joinDate,
+          hostReviewCount: hostReviewCount,
+          superhostFlag: superhostFlag,
+          hostDescription: hostDescription,
+          stayDescription: stayDescription,
+          responseRate: responseRate,
+          responseTime: responseTime
         };
 
         dbHelper.createHost(hostInfo);

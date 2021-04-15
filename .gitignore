@@ -24,3 +24,6 @@ coverage
 build/
 dist/
 
+# Ubuntu login key
+*.pem
+login.sh

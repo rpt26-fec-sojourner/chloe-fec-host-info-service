@@ -14,6 +14,7 @@ const LeftMargin = styled.div`
   width: 41.6667%;
   padding-left: 8px;
   padding-right: 8px;
+  padding-bottom: 48px;
   float: left;
 `;
 
@@ -22,6 +23,7 @@ const RightMargin = styled.div`
   margin-left: 8.33333%;
   padding-left: 8px;
   padding-right: 8px;
+  padding-bottom: 48px;
   float: left;
 `;
 

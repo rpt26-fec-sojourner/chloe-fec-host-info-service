@@ -36,6 +36,7 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: initial;
   margin-bottom: 24px;
+  padding-left: 8px;
 `;
 
 const Name = (props) => {

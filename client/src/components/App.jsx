@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-const url = 'http://localhost:2222';
+// const url = 'http://localhost:2222';
+const url = 'http://18.220.77.80:2222';
 import Name from './Name.jsx';
 import Reviews from './Reviews.jsx';
 import ResponseInfo from './ResponseInfo.jsx';

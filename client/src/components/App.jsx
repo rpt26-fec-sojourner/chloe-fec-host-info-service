@@ -64,12 +64,10 @@ class App extends React.Component {
     axios.get(`${url}/host/${listingID}`)
       .then((res) => {
         let hostDesc = res.data.hostDescription.length <= 180 ? res.data.hostDescription : `${res.data.hostDescription.substring(1, 181)}...`;
-        //For some reason, my pic URL is not being sent in the response (even though I see it in Mongo CLI using the same functions that my server does) so as a workaround, just populating the URL here.
-        let hostPicture = `https://airbnbhostpictures.s3.amazonaws.com/pic-${listingID}.jpg`;
 
         this.setState({
           listingID: listingID,
-          hostPicture: hostPicture,
+          hostPicture: res.data.hostPicture,
           hostName: res.data.hostName,
           joinDate: res.data.joinDate,
           hostReviewCount: res.data.hostReviewCount,

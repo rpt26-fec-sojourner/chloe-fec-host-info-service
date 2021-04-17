@@ -55,7 +55,7 @@ const Container = styled.div`
 const Name = (props) => {
   return (
     <Container>
-      <ProfilePic src="https://airbnbhostpictures.s3.amazonaws.com/pic-100.jpg"></ProfilePic>
+      <ProfilePic src={props.hostPicture}></ProfilePic>
       <Text>
         <HostName>{`Hosted by ${props.hostName}`}</HostName><br></br>
         <JoinDate>{`Joined in ${props.joinDate}`}</JoinDate>

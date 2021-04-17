@@ -40,6 +40,7 @@ class App extends React.Component {
 
     this.state = {
       listingID: 1,
+      hostPicture: '',
       hostName: '',
       joinDate: '',
       hostReviewCount: '',
@@ -63,9 +64,12 @@ class App extends React.Component {
     axios.get(`${url}/host/${listingID}`)
       .then((res) => {
         let hostDesc = res.data.hostDescription.length <= 180 ? res.data.hostDescription : `${res.data.hostDescription.substring(1, 181)}...`;
+        //For some reason, my pic URL is not being sent in the response (even though I see it in Mongo CLI using the same functions that my server does) so as a workaround, just populating the URL here.
+        let hostPicture = `https://airbnbhostpictures.s3.amazonaws.com/pic-${listingID}.jpg`;
 
         this.setState({
           listingID: listingID,
+          hostPicture: hostPicture,
           hostName: res.data.hostName,
           joinDate: res.data.joinDate,
           hostReviewCount: res.data.hostReviewCount,
@@ -75,8 +79,6 @@ class App extends React.Component {
           responseRate: res.data.responseRate,
           responseTime: res.data.responseTime
         });
-
-        console.log('state: ', this.state);
       })
       .catch((err) => {
         console.log(`Error getting host Info for listing ID: ${listingID}`);
@@ -86,7 +88,7 @@ class App extends React.Component {
   render() {
     return (
       <Container>
-        <Name hostName={this.state.hostName} joinDate={this.state.joinDate}/>
+        <Name hostPicture={this.state.hostPicture} hostName={this.state.hostName} joinDate={this.state.joinDate}/>
         <LeftMargin>
           <Reviews count={this.state.hostReviewCount} superhost={this.state.superhostFlag}/>
           <Description hostDescription={this.state.hostDescription} stayDescription={this.state.stayDescription}/>

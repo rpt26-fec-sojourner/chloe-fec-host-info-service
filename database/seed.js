@@ -80,6 +80,10 @@ seeder.responseTimes = [
   'a month'
 ];
 
+seeder.generateHostPic = (id) => {
+  return `https://airbnbhostpictures.s3.amazonaws.com/pic-${id}.jpg`;
+};
+
 seeder.generateHostName = (randomNumber) => {
   const hostNameIndex = Math.floor(randomNumber * seeder.hostNames.length);
 
@@ -132,6 +136,7 @@ seeder.seedDB = () => {
     .then(() => {
       let listingID = 1;
       let randomNumber;
+      let hostPicture;
       let hostName;
       let joinDate;
       let hostReviewCount;
@@ -145,6 +150,7 @@ seeder.seedDB = () => {
 
       while (listingID <= 100) {
         randomNumber = Math.random();
+        hostPicture = seeder.generateHostPic(listingID);
         hostName = seeder.generateHostName(randomNumber);
         joinDate = seeder.generateJoinDate(randomNumber);
         hostReviewCount = seeder.generateHostReviewCount(randomNumber);
@@ -155,6 +161,7 @@ seeder.seedDB = () => {
         responseTime = seeder.generateResponseTime(randomNumber);
         hostInfo = {
           listingID: listingID,
+          hostPicture: hostPicture,
           hostName: hostName,
           joinDate: joinDate,
           hostReviewCount: hostReviewCount,

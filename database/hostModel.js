@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 let hostSchema = mongoose.Schema({
   listingID: Number,
+  hostPicture: String,
   hostName: String,
   joinDate: String,
   hostReviewCount: String,
@@ -26,6 +27,7 @@ Host.createHost = (newHost) => {
   let newHostSchemaInstance = new Host(
     {
       listingID: newHost.listingID,
+      hostPicture: newHost.hostPicture,
       hostName: newHost.hostName,
       joinDate: newHost.joinDate,
       hostReviewCount: newHost.hostReviewCount,
@@ -37,7 +39,7 @@ Host.createHost = (newHost) => {
     }
   );
 
-  newHostSchemaInstance.save()
+  return newHostSchemaInstance.save()
     .catch((err) => {
       console.log('Error creating host: ', err);
     });
